@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survival Prediction</title>
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        /* background-color: #f4f4f9; */
+        background-color: #1d1f20;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Main container */
+      .container {
+        background-color: #f4f4f9;
+        /* background-color: #fff; */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 400px;
+        padding: 30px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #2e3a59;
+      }
+
+      /* Form styling */
+      label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        text-align: left;
+      }
+      label span{
+          font-size: 12px;
+          color:rgb(86, 86, 86);
+      }
+
+      input[type="number"],
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      input[type="number"]{
+        border:1px solid rgb(0, 119, 255);
+        background-color: rgb(238, 238, 238);
+      }
+
+      input[type="number"]:focus{
+        outline: none;
+        border-color: #5b8ef9;
+        border-width: 2px;
+        background-color: greenyellow;
+      }
+      button:hover {
+        outline: none;
+        background-color: rgb(255, 98, 0);
+      }
+
+      button {
+        background-color: #5b8ef9;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 300ms;
+      }
+
+      button:active {
+        background-color: #4a74e6;
+      }
+
+      /* Result styling */
+      .result {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        background-color: #c5f8ff;
+        border: 2px solid black;
+        border-radius: 5px;
+      }
+
+      .error {
+        color: red;
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .survived {
+        color: green;
+      }
+      .died {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Enter Data for Survival Prediction</h1>
+      <form method="POST">
+        <label for="age">Age: <span>(10 - 100)</span></label>
+        <input type="number" name="age" min=10 max=100 required /><br />
+
+        <label for="operation_year">Year of Operation: <span>(1940 - 1980)</span></label>
+        <input type="number" name="operation_year" min=40 max=80 required /><br />
+
+        <label for="nbr_axillary_nodes">Number of Axillary Nodes: <span>(0 - 50)</span></label>
+        <input type="number" name="nbr_axillary_nodes" min=0 max=50 required /><br />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      {% if dt_prediction %}
+      <div class="result">
+        <p>
+          Decision Tree Prediction: {% if dt_prediction == 1 %}
+          <span class="survived">Survived</span>
+          {% else %}
+          <span class="died">Died</span>
+          {% endif %}
+        </p>
+        <p>
+          Naive Bayes Prediction: {% if nb_prediction == 1 %}
+          <span class="survived">Survived</span>
+          {% else %}
+          <span class="died">Died</span>
+          {% endif %}
+        </p>
+      </div>
+      {% endif %} {% if error %}
+      <p class="error">Error: {{ error }}</p>
+      {% endif %}
+  </body>
+</html>
