@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
 import pickle
 
 # Initialize Flask app
@@ -46,3 +43,10 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+# 23, 55, 0 -> survived, survived
+
+# 50, 50, 5 -> died, survived
+
+# 50, 55, 30 -> died, died 
